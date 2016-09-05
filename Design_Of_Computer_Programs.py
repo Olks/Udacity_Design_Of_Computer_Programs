@@ -1,16 +1,16 @@
 from collections import defaultdict
 import random
 
-def test_shuffler(shuffler, deck = 'abcd', n=10000):
+def test_shuffler(shuffler, deck = 'abcd', n=100000):
     counts = defaultdict(int)
     for _ in range(n):
         input = list(deck)
         shuffler(input)
         counts[''.join(input)] += 1
     e = n*1./factorial(len(deck))
-    ok = all((0.9 <= counts[item]/e <= 1.1)
+    ok = all((0.7 <= counts[item]/e <= 1.3)
              for item in counts)
-    name = shufflert.__name__
+    name = shuffler.__name__
     print '%s(%s)%s' % (name, deck, ('ok' if ok else '*** BAD ***'))
     print '   ',
     for item, count in sorted(counts.items()):
@@ -25,7 +25,8 @@ def shuffle3(deck):
         swap(deck, i, random.randrange(N))
 
 def swap(deck, i, j):
-    print 'swap', i, j
     deck[i], deck[j] = deck[j], deck[i]
 
 test_shuffler(shuffle3)
+
+print 100000/factorial(4)
